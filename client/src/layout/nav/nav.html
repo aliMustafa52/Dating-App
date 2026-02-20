@@ -1,0 +1,77 @@
+<nav class="bg-bg-sidebar border-b border-divider h-16 px-6 flex items-center justify-between sticky top-0 z-50 shadow-sm font-sans">
+  
+  <div class="flex items-center gap-8">
+    
+    <a href="#" class="text-text-header text-xl font-bold tracking-wide flex items-center gap-2 hover:opacity-80 transition-opacity">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-black text-sm">
+        MF
+      </div>
+      Make Frineds
+    </a>
+
+    <div class="hidden md:flex items-center gap-2">
+        <button 
+            (click)="setSection('matches')"
+            class="px-4 py-2 rounded-md font-medium transition-all duration-200"
+            [ngClass]="{
+            'bg-primary text-text-header shadow-sm': activeSection === 'matches',
+            'text-text-muted hover:bg-bg-hover hover:text-text-normal': activeSection !== 'matches'
+            }">
+            Matches
+        </button>
+
+        <button 
+            (click)="setSection('messages')"
+            class="px-4 py-2 rounded-md font-medium transition-all duration-200"
+            [ngClass]="{
+            'bg-primary text-text-header shadow-sm': activeSection === 'messages',
+            'text-text-muted hover:bg-bg-hover hover:text-text-normal': activeSection !== 'messages'
+            }">
+            Messages
+        </button>
+
+        <button 
+            (click)="setSection('lists')"
+            class="px-4 py-2 rounded-md font-medium transition-all duration-200"
+            [ngClass]="{
+            'bg-primary text-text-header shadow-sm': activeSection === 'lists',
+            'text-text-muted hover:bg-bg-hover hover:text-text-normal': activeSection !== 'lists'
+            }">
+            Lists
+        </button>
+    </div>
+  </div>
+
+  <form class="hidden lg:flex items-center gap-3" (submit)="onLogin($event)">
+    <input 
+      type="text" 
+      placeholder="Username" 
+      class="bg-bg-input text-text-normal placeholder-text-muted text-sm rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow w-40"
+      required
+    >
+    <input 
+      type="password" 
+      placeholder="Password" 
+      class="bg-bg-input text-text-normal placeholder-text-muted text-sm rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow w-40"
+      required
+    >
+    <button 
+      type="submit" 
+      class="bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-5 py-2 rounded transition-colors duration-200"
+    >
+      Log In
+    </button>
+  </form>
+
+  <button class="lg:hidden text-text-normal hover:text-text-header transition-colors">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+</nav>
+
+<main class="min-h-screen bg-bg-main p-8">
+  <h1 class="text-text-header text-2xl font-bold">
+    Current Section: <span class="capitalize text-primary">{{ activeSection }}</span>
+  </h1>
+</main>
