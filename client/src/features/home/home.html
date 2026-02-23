@@ -1,0 +1,41 @@
+<div class="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] bg-bg-main text-center px-6 py-12">
+  @if (accountService.authMode() === 'home') {
+  <div class="mb-8 p-6 bg-primary/10 rounded-3xl ring-1 ring-primary/20 shadow-2xl">
+    <!-- Main Icon (Sparkles) -->
+    <svg class="w-20 h-20 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 00 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 00 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 00 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 00 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 00 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 00 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+    </svg>
+  </div>
+
+  <h1 class="text-5xl md:text-7xl font-black text-text-header tracking-tighter mb-6">
+    Find Your <span class="text-primary">Perfect Match</span>
+  </h1>
+
+  <p class="text-lg md:text-2xl text-text-muted max-w-3xl leading-relaxed mb-12 font-medium">
+    Stop swiping and start connecting. Join our community to meet real people, share real moments, and build 
+    connections that actually matter.
+  </p>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <button (click)="accountService.authMode.set('register')"
+      class="bg-primary hover:bg-primary-hover text-white text-lg font-bold px-10 py-4 rounded-full transition-all duration-300 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95">
+      Register Now
+    </button>
+    <button
+      class="bg-bg-input hover:bg-bg-hover text-text-normal text-lg font-bold px-10 py-4 rounded-full border border-divider transition-all duration-300 hover:scale-105 active:scale-95">
+      Learn More
+    </button>
+  </div>
+  } @else {
+  <div class="w-full max-w-md mx-auto">
+    <div class="bg-bg-sidebar p-8 rounded-3xl border border-divider shadow-2xl ring-1 ring-white/5">
+      @if (accountService.authMode() === 'login') {
+      <app-login />
+      } @else if (accountService.authMode() === 'register') {
+      <app-register />
+      }
+    </div>
+  </div>
+  }
+</div>

@@ -1,37 +1,38 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AccountService } from '../../core/services/account-service';
 
 @Component({
   selector: 'app-nav',
   imports: [
-    NgClass,
-    ReactiveFormsModule
+    NgClass
   ],
   templateUrl: './nav.html',
   styleUrl: './nav.css',
 })
 export class Nav {
   activeSection = 'matches'; // Default active section
+  isMenuOpen = signal(false);
 
-  loginForm = new FormGroup({
-    email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    password: new FormControl('', { nonNullable: true, validators: [Validators.required] })
-  });
+  accountService = inject(AccountService);
 
   setSection(section: string) {
     this.activeSection = section;
+    this.isMenuOpen.set(false);
   }
 
-  onLogin() {
-    if (this.loginForm.valid) {
-      // getRawValue() gets the strictly typed object: { email: string, password: string }
-      const credentials = this.loginForm.getRawValue();
-      console.log('Login form submitted!', credentials);
-      // Add your auth logic here
-    } else {
-      // Marks all fields as touched so validation errors can be shown if you add them later
-      this.loginForm.markAllAsTouched();
-    }
+  toggleMenu() {
+    this.isMenuOpen.update(v => !v);
+  }
+
+  openLogin() {
+    this.accountService.authMode.set('login');
+    this.isMenuOpen.set(false);
+  }
+
+  logout() {
+    this.accountService.logout();
+    this.isMenuOpen.set(false);
   }
 }
