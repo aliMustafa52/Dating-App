@@ -1,82 +1,96 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="flex flex-col gap-6">
-  <div class="text-center mb-2">
-    <h2 class="text-3xl font-black text-text-header tracking-tight">Log In</h2>
-    <p class="text-text-muted mt-1 font-medium">Continue your journey</p>
-  </div>
+<div class="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-bg-main">
 
-  @if (errorMessage()) {
-    <div class="bg-red-500/10 border border-red-500/20 text-red-500 text-sm py-3 px-4 rounded-xl text-center font-medium animate-in fade-in duration-300">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()"
+    class="w-full max-w-[420px] p-8 sm:p-10 flex flex-col gap-6 rounded-2xl shadow-2xl bg-bg-sidebar border border-divider">
+
+    <div class="text-center mb-2">
+      <h2 class="text-3xl font-black text-text-header tracking-tight">Log In</h2>
+      <p class="text-text-muted mt-2 font-medium">Continue your journey</p>
+    </div>
+
+    @if (errorMessage()) {
+    <div
+      class="bg-status-dnd/10 border border-status-dnd/20 text-status-dnd text-sm py-3 px-4 rounded-xl text-center font-medium animate-in fade-in zoom-in-95 duration-300">
       {{ errorMessage() }}
     </div>
-  }
+    }
 
-  <div class="flex flex-col gap-4">
-    <div class="flex flex-col gap-1.5 text-left">
-      <label class="text-xs font-bold text-text-muted uppercase tracking-wider ml-1">Email Address</label>
-      <div class="relative group">
+    <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-1.5 text-left">
+        <label class="text-xs font-bold text-text-muted uppercase tracking-wider ml-1">Email Address</label>
+        <div class="relative group">
+          <span
+            class="absolute inset-y-0 left-0 flex items-center pl-4 text-text-muted group-focus-within:text-text-normal transition-colors duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" />
+            </svg>
+          </span>
+          <input type="email" formControlName="email" placeholder="you@example.com"
+            class="w-full bg-bg-input text-text-normal placeholder-text-muted text-sm rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-primary border border-transparent transition-all shadow-sm focus:bg-bg-sidebar"
+            [class.border-status-dnd]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+            [class.focus:ring-status-dnd]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        </div>
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
         <span
-          class="absolute inset-y-0 left-0 flex items-center pl-4 text-text-muted group-focus-within:text-primary transition-colors">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" />
-          </svg>
-        </span>
-        <input type="email" formControlName="email" placeholder="you@example.com"
-          class="w-full bg-bg-input text-text-normal placeholder-text-muted text-sm rounded-2xl pl-12 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-primary/50 border border-divider transition-all shadow-inner"
-          [class.border-red-500]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-      </div>
-      @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
-        <span class="text-[10px] text-red-500 font-bold uppercase tracking-wide ml-2">
+          class="text-[10px] text-status-dnd font-bold uppercase tracking-wide ml-2 animate-in fade-in slide-in-from-top-1">
           @if (loginForm.get('email')?.errors?.['required']) { Email is required }
           @else if (loginForm.get('email')?.errors?.['email']) { Invalid email format }
         </span>
-      }
-    </div>
-
-    <div class="flex flex-col gap-1.5 text-left">
-      <label class="text-xs font-bold text-text-muted uppercase tracking-wider ml-1">Password</label>
-      <div class="relative group">
-        <span
-          class="absolute inset-y-0 left-0 flex items-center pl-4 text-text-muted group-focus-within:text-primary transition-colors">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-          </svg>
-        </span>
-        <input type="password" formControlName="password" placeholder="••••••••"
-          class="w-full bg-bg-input text-text-normal placeholder-text-muted text-sm rounded-2xl pl-12 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-primary/50 border border-divider transition-all shadow-inner"
-          [class.border-red-500]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        }
       </div>
-      @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-        <span class="text-[10px] text-red-500 font-bold uppercase tracking-wide ml-2">Password is required</span>
-      }
-    </div>
-  </div>
 
-  <div class="flex flex-col gap-3 mt-4">
-    <button type="submit" [disabled]="loginForm.invalid || loading()"
-      class="w-full bg-primary hover:bg-primary-hover text-white font-black py-4 rounded-2xl transition-all duration-300 shadow-xl shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] flex items-center justify-center gap-2">
-      @if (loading()) {
-        <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+      <div class="flex flex-col gap-1.5 text-left">
+        <label class="text-xs font-bold text-text-muted uppercase tracking-wider ml-1">Password</label>
+        <div class="relative group">
+          <span
+            class="absolute inset-y-0 left-0 flex items-center pl-4 text-text-muted group-focus-within:text-text-normal transition-colors duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </span>
+          <input type="password" formControlName="password" placeholder="••••••••"
+            class="w-full bg-bg-input text-text-normal placeholder-text-muted text-sm rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-primary border border-transparent transition-all shadow-sm focus:bg-bg-sidebar"
+            [class.border-status-dnd]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+            [class.focus:ring-status-dnd]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        </div>
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+        <span
+          class="text-[10px] text-status-dnd font-bold uppercase tracking-wide ml-2 animate-in fade-in slide-in-from-top-1">Password
+          is required</span>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 mt-2">
+      <button type="submit" [disabled]="loginForm.invalid || loading()"
+        class="w-full bg-primary hover:bg-primary-hover text-text-header font-bold py-3.5 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] flex items-center justify-center gap-2">
+        @if (loading()) {
+        <svg class="animate-spin h-5 w-5 text-text-header" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+          </path>
         </svg>
         Signing In...
-      } @else {
+        } @else {
         Sign In
-      }
-    </button>
-    <button type="button" (click)="accountService.authMode.set('home')"
-      class="text-text-muted hover:text-text-normal font-medium py-2 transition-colors text-sm">
-      Cancel
-    </button>
-  </div>
+        }
+      </button>
+      <button type="button" routerLink="/"
+        class="text-text-muted hover:text-text-normal font-medium py-2 transition-colors text-sm">
+        Cancel
+      </button>
+    </div>
 
-  <div class="mt-4 text-center">
-    <p class="text-text-muted text-sm">
-      Don't have an account?
-      <button type="button" (click)="accountService.authMode.set('register')" class="text-primary font-bold hover:underline">Register
-        now</button>
-    </p>
-  </div>
-</form>
+    <div class="mt-2 text-center">
+      <p class="text-text-muted text-sm">
+        Need an account?
+        <button type="button" routerLink="/register" class="text-primary font-bold hover:underline underline-offset-4">
+          Register
+        </button>
+      </p>
+    </div>
+  </form>
+</div>

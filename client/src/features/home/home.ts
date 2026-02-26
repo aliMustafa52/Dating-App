@@ -1,14 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { Register } from '../account/register/register';
-import { Login } from '../account/login/login';
-import { AccountService } from '../../core/services/account-service';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [Register, Login],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
-  accountService = inject(AccountService);
 }

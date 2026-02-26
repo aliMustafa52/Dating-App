@@ -1,16 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AccountService } from '../../../core/services/account-service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
   accountService = inject(AccountService);
+  private router = inject(Router);
   loading = signal(false);
   errorMessage = signal<string | null>(null);
 
@@ -28,8 +30,8 @@ export class Login {
       this.accountService.login(credentials).subscribe({
         next: _ => {
           this.loginForm.reset();
-          this.accountService.authMode.set('home');
           this.loading.set(false);
+          this.router.navigateByUrl('/members');
         },
         error: err => {
           this.errorMessage.set(err.error?.message || err.error || 'Login failed');

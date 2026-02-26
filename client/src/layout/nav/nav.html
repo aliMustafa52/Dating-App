@@ -3,36 +3,31 @@
 
     <div class="flex items-center gap-8">
 
-      <a href="#"
+      <a routerLink="/"
         class="text-text-header text-xl font-bold tracking-wide flex items-center gap-2 hover:opacity-80 transition-opacity">
         <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-black text-sm">
           MF
         </div>
-        Make Frineds
+        Make Friends
       </a>
 
       <div class="hidden md:flex items-center gap-2">
-        <button (click)="setSection('matches')" class="px-4 py-2 rounded-md font-medium transition-all duration-200"
-          [ngClass]="{
-              'bg-primary text-text-header shadow-sm': activeSection === 'matches',
-              'text-text-muted hover:bg-bg-hover hover:text-text-normal': activeSection !== 'matches'
-              }">
+        <button routerLink="/members"
+          routerLinkActive="bg-primary text-text-normal shadow-md font-semibold ring-1 ring-black/5"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="px-4 py-2 rounded-md font-medium text-text-muted transition-all duration-200 ease-in-out hover:bg-bg-hover hover:text-text-normal hover:-translate-y-[1px] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1">
           Matches
         </button>
 
-        <button (click)="setSection('messages')" class="px-4 py-2 rounded-md font-medium transition-all duration-200"
-          [ngClass]="{
-              'bg-primary text-text-header shadow-sm': activeSection === 'messages',
-              'text-text-muted hover:bg-bg-hover hover:text-text-normal': activeSection !== 'messages'
-              }">
+        <button routerLink="/messages"
+          routerLinkActive="bg-primary text-text-normal shadow-md font-semibold ring-1 ring-black/5"
+          class="px-4 py-2 rounded-md font-medium text-text-muted transition-all duration-200 ease-in-out hover:bg-bg-hover hover:text-text-normal hover:-translate-y-[1px] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1">
           Messages
         </button>
 
-        <button (click)="setSection('lists')" class="px-4 py-2 rounded-md font-medium transition-all duration-200"
-          [ngClass]="{
-              'bg-primary text-text-header shadow-sm': activeSection === 'lists',
-              'text-text-muted hover:bg-bg-hover hover:text-text-normal': activeSection !== 'lists'
-              }">
+        <button routerLink="/lists"
+          routerLinkActive="bg-primary text-text-normal shadow-md font-semibold ring-1 ring-black/5"
+          class="px-4 py-2 rounded-md font-medium text-text-muted transition-all duration-200 ease-in-out hover:bg-bg-hover hover:text-text-normal hover:-translate-y-[1px] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1">
           Lists
         </button>
       </div>
@@ -57,7 +52,7 @@
     </div>
     } @else {
     <div class="hidden lg:flex items-center gap-2">
-      <button (click)="openLogin()"
+      <button routerLink="/login"
         class="bg-primary hover:bg-primary-hover text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-primary/20 active:scale-95">
         Log In
       </button>
@@ -75,27 +70,18 @@
   @if (isMenuOpen()) {
   <div class="lg:hidden bg-bg-sidebar border-b border-divider px-6 py-4 flex flex-col gap-4 shadow-lg">
     <div class="flex flex-col gap-1">
-      <button (click)="setSection('matches')" class="w-full text-left px-4 py-3 rounded-md font-medium transition-all"
-        [ngClass]="{
-              'bg-primary text-text-header': activeSection === 'matches',
-              'text-text-muted hover:bg-bg-hover': activeSection !== 'matches'
-              }">
+      <button routerLink="/members" routerLinkActive="bg-primary text-text-header" (click)="isMenuOpen.set(false)"
+        class="w-full text-left px-4 py-3 rounded-md font-medium text-text-muted hover:bg-bg-hover transition-all">
         Matches
       </button>
 
-      <button (click)="setSection('messages')" class="w-full text-left px-4 py-3 rounded-md font-medium transition-all"
-        [ngClass]="{
-              'bg-primary text-text-header': activeSection === 'messages',
-              'text-text-muted hover:bg-bg-hover': activeSection !== 'messages'
-              }">
+      <button routerLink="/messages" routerLinkActive="bg-primary text-text-header" (click)="isMenuOpen.set(false)"
+        class="w-full text-left px-4 py-3 rounded-md font-medium text-text-muted hover:bg-bg-hover transition-all">
         Messages
       </button>
 
-      <button (click)="setSection('lists')" class="w-full text-left px-4 py-3 rounded-md font-medium transition-all"
-        [ngClass]="{
-              'bg-primary text-text-header': activeSection === 'lists',
-              'text-text-muted hover:bg-bg-hover': activeSection !== 'lists'
-              }">
+      <button routerLink="/lists" routerLinkActive="bg-primary text-text-header" (click)="isMenuOpen.set(false)"
+        class="w-full text-left px-4 py-3 rounded-md font-medium text-text-muted hover:bg-bg-hover transition-all">
         Lists
       </button>
     </div>
@@ -126,7 +112,7 @@
     </div>
     } @else {
     <div class="px-4 pb-2">
-      <button (click)="openLogin()"
+      <button routerLink="/login" (click)="isMenuOpen.set(false)"
         class="w-full bg-primary hover:bg-primary-hover text-white text-base font-bold py-4 rounded-2xl transition-all duration-300 shadow-xl shadow-primary/20 active:scale-95">
         Log In
       </button>
@@ -135,9 +121,3 @@
   </div>
   }
 </div>
-
-<!-- <main class="min-h-screen bg-bg-main p-8">
-  <h1 class="text-text-header text-2xl font-bold">
-    Current Section: <span class="capitalize text-primary">{{ activeSection }}</span>
-  </h1>
-</main> -->
