@@ -11,6 +11,5 @@ import { ToastComponent } from "../core/toast.component";
   styleUrl: './app.css'
 })
 export class App {
-  private accountService = inject(AccountService);
   protected router = inject(Router);
 }

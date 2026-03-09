@@ -1,13 +1,107 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>Client</title>
+  <title>Make Friends</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style>
+    /* We use raw hex codes here because Tailwind hasn't loaded yet! */
+    #initial-splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #36393f;
+      /* Your bg-main color */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      font-family: system-ui, -apple-system, sans-serif;
+      transition: opacity 0.4s ease-out;
+      /* Smooth fade out */
+    }
+
+    /* Matches the glowing icon box from your Home page */
+    .splash-logo {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(88, 101, 242, 0.1);
+      /* primary/10 */
+      border: 1px solid rgba(88, 101, 242, 0.2);
+      /* ring-primary/20 */
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .splash-logo svg {
+      width: 40px;
+      height: 40px;
+      color: #5865F2;
+      /* Your primary Blurple */
+    }
+
+    .splash-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #2f3136;
+      /* Your bg-sidebar color */
+      border-top: 4px solid #5865F2;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .7;
+        transform: scale(0.95);
+      }
+    }
+  </style>
 </head>
-<body>
+
+<body class="bg-bg-main text-text-normal">
+
+  <div id="initial-splash">
+    <div class="splash-logo">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    </div>
+    <div class="splash-spinner"></div>
+  </div>
+
   <app-root></app-root>
+
 </body>
+
 </html>

@@ -13,10 +13,10 @@ export class AccountService {
   currentUser = signal<User | null>(null);
 
   constructor() {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      this.currentUser.set(JSON.parse(userString));
-    }
+    // const userString = localStorage.getItem('user');
+    // if (userString) {
+    //   this.currentUser.set(JSON.parse(userString));
+    // }
   }
 
   login(cred: LoginCreds) {
