@@ -1,0 +1,54 @@
+<div class="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] bg-bg-main p-6 overflow-y-auto">
+    <div class="w-full max-w-4xl">
+        <!-- Error Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-24 h-24 bg-status-dnd/10 rounded-full mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-status-dnd" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            
+            <h1 class="text-4xl font-extrabold text-text-header mb-2 tracking-tight">Internal Server Error</h1>
+            <p class="text-xl text-status-dnd font-bold mb-4">Error {{error()?.statusCode || 500}}</p>
+            
+            <div class="bg-bg-sidebar rounded-lg p-6 border-l-4 border-status-dnd mb-8 text-left shadow-xl">
+                <p class="text-text-header font-bold text-lg mb-1">Message:</p>
+                <p class="text-text-normal break-words leading-relaxed">
+                    {{error()?.message || 'A critical error occurred on the server. Please try again later.'}}
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <button routerLink="/" 
+                    class="group relative px-8 py-3 bg-primary text-white font-bold rounded-md hover:bg-primary-hover transition-all duration-300 shadow-lg w-full sm:w-auto">
+                    Return to Safety
+                </button>
+                
+                @if (error()?.details) {
+                    <button (click)="detailsToggle()" 
+                        class="px-8 py-3 bg-bg-input text-text-normal font-bold rounded-md hover:bg-bg-hover transition-all duration-300 w-full sm:w-auto border border-divider">
+                        {{ showDetails() ? 'Hide Technical Details' : 'Show Technical Details' }}
+                    </button>
+                }
+            </div>
+        </div>
+
+        <!-- Technical Details (Stack Trace) -->
+        @if (error()?.details && showDetails()) {
+            <div class="bg-bg-server rounded-xl border border-divider overflow-hidden">
+                <div class="bg-bg-sidebar px-6 py-3 border-b border-divider flex items-center justify-between">
+                    <span class="text-text-muted font-mono text-xs uppercase tracking-widest">Stack Trace</span>
+                    <span class="text-xs text-status-idle bg-status-idle/10 px-2 py-1 rounded">Development Mode</span>
+                </div>
+                <div class="p-6 overflow-x-auto max-h-[500px]">
+                    <pre class="text-text-normal font-mono text-sm leading-relaxed whitespace-pre-wrap">{{error()?.details}}</pre>
+                </div>
+            </div>
+        }
+
+        <p class="text-center text-text-muted text-sm mt-8 max-w-md mx-auto italic">
+            Note: If you are seeing this error frequently, please contact support with the status code provided above.
+        </p>
+    </div>
+</div>

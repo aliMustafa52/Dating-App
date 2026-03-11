@@ -1,0 +1,35 @@
+<div class="container mx-auto mt-10 p-4">
+    <div class="flex flex-wrap gap-4 mb-8">
+        <button (click)="get400Error()" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Test 400 Error
+        </button>
+        <button (click)="get401Error()" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Test 401 Error
+        </button>
+        <button (click)="get404Error()" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Test 404 Error
+        </button>
+        <button (click)="get500Error()" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Test 500 Error
+        </button>
+        <button (click)="get400ValidationError()" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Test Validation Error
+        </button>
+    </div>
+
+    @if (validationErrors().length > 0) {
+        <div class="mt-5 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            <h3 class="font-bold mb-2">Validation Errors:</h3>
+            <ul class="list-disc list-inside">
+                @for (error of validationErrors(); track $index) {
+                    <li>{{error}}</li>
+                }
+            </ul>
+        </div>
+    }
+</div>

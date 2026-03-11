@@ -1,0 +1,49 @@
+<div class="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] bg-bg-main p-6">
+    <div class="text-center max-w-lg">
+        <!-- 404 Visual -->
+        <div class="relative inline-block mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-primary opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-6xl font-black text-primary drop-shadow-2xl">404</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <h1 class="text-4xl font-extrabold text-text-header mb-4 tracking-tight">
+            Whoops! We're lost.
+        </h1>
+        
+        <p class="text-lg text-text-normal mb-10 leading-relaxed">
+            It seems the page you are looking for has vanished into thin air. 
+            Perhaps it never existed, or it's hiding in a different room.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button (click)="goBack()" 
+                class="group relative inline-flex items-center justify-center px-8 py-4 bg-bg-input text-text-normal font-bold rounded-md hover:bg-bg-hover transition-all duration-300 transform hover:-translate-y-1 shadow-lg w-full sm:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Go Back</span>
+            </button>
+
+            <button routerLink="/" 
+                class="group relative inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-md hover:bg-primary-hover transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-primary/30 w-full sm:w-auto">
+                <span>Return to Safety</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Subtle Decoration -->
+        <div class="mt-16 pt-8 border-t border-divider opacity-40">
+            <p class="text-sm text-text-muted italic">
+                Error Code: PAGE_NOT_FOUND
+            </p>
+        </div>
+    </div>
+</div>
