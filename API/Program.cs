@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //register the token service
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
 //Configure Authentication (The Validator)
 builder.Services
@@ -75,5 +76,21 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//service locator pattern to create a scope and get the DbContext instance to seed the database
+using var scope = app.Services.CreateScope();
+try
+{
+    var context = scope.ServiceProvider
+        .GetRequiredService<AppDbContext>();
+
+    await context.Database.MigrateAsync();
+    await Seed.SeedData(context);
+}
+catch (Exception ex)
+{
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred during seeding the database");
+}
 
 app.Run();
