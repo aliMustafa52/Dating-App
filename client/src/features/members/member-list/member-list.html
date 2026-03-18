@@ -1,1 +1,22 @@
-<p>member-list works!</p>
+<div class="h-full bg-bg-main p-6 overflow-y-auto">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8 border-b border-divider pb-4">
+      <h2 class="text-3xl font-bold text-text-header flex items-center gap-3">
+        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        Discover Matches
+      </h2>
+      <p class="text-text-muted mt-2">Find and connect with people near you.</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      @for (member of memberService.members(); track member.id) {
+        <app-member-card [member]="member"></app-member-card>
+      }
+    </div>
+  </div>
+</div>

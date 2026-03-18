@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MemberService } from '../../../core/services/member-service';
+import { MemberCard } from '../member-card/member-card';
 
 @Component({
   selector: 'app-member-list',
-  imports: [],
+  imports: [MemberCard],
   templateUrl: './member-list.html',
   styleUrl: './member-list.css',
 })
-export class MemberList {
+export class MemberList implements OnInit {
+  memberService = inject(MemberService);
 
+  ngOnInit(): void {
+    if (this.memberService.members().length === 0) {
+      this.memberService.getMembers();
+    }
+  }
 }

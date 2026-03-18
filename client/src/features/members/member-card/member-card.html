@@ -1,0 +1,53 @@
+<div
+  class="group flex flex-col bg-bg-sidebar rounded-xl border border-divider overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 cursor-pointer"
+  [routerLink]="['/members', member().id]">
+
+  <!-- Image Section -->
+  <div class="relative w-full aspect-[4/5] bg-bg-server overflow-hidden">
+    <img [src]="member().imageUrl || '/user.png'" [alt]="member().displayName"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+
+    <!-- Online Status Indicator -->
+    <div class="absolute bottom-3 right-3 w-4 h-4 rounded-full bg-status-online border-2 border-bg-sidebar shadow-sm">
+    </div>
+
+    <!-- Info overlay on image -->
+    <div class="absolute bottom-0 left-0 p-4 w-full">
+      <h3 class="text-xl font-bold text-text-header truncate flex items-center gap-2 drop-shadow-md">
+        {{member().displayName}}
+      </h3>
+    </div>
+  </div>
+
+  <!-- Details Section -->
+  <div class="p-4 flex flex-col gap-3">
+    <div class="flex items-center text-text-muted text-sm gap-2">
+      <svg class="w-4 h-4 flex-shrink-0 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <span class="truncate">{{member().city}}, {{member().country}}</span>
+    </div>
+
+    <!-- Buttons / Actions -->
+    <div class="flex gap-2 mt-1">
+      <button
+        class="flex-1 bg-bg-input hover:bg-primary text-text-normal hover:text-white text-sm font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+        Like
+      </button>
+      <button
+        class="flex-none aspect-square px-3 bg-bg-input hover:bg-primary text-text-normal hover:text-white rounded-lg transition-colors flex items-center justify-center">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+</div>

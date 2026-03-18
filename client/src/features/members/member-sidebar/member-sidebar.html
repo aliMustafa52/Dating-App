@@ -1,0 +1,39 @@
+<div class="bg-bg-sidebar rounded-xl border border-divider overflow-hidden shadow-lg sticky top-6">
+  <img [src]="member().imageUrl || '/user.png'" [alt]="member().displayName" class="w-full aspect-[4/5] object-cover">
+  <div class="p-5 flex flex-col gap-4">
+    <div>
+      <h2 class="text-2xl font-bold text-text-header">{{member().displayName}}</h2>
+      <p class="text-text-muted mt-1">{{member().city}}, {{member().country}}</p>
+    </div>
+    
+    <div class="h-px bg-divider"></div>
+    
+    <div class="flex flex-col gap-3 text-sm">
+      <div class="flex justify-between items-center">
+        <span class="text-text-muted">Gender</span>
+        <span class="text-text-normal font-medium capitalize">{{member().gender}}</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-text-muted">Birth Date</span>
+        <span class="text-text-normal font-medium">{{member().birthDate}}</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-text-muted">Last Active</span>
+        <span class="text-text-normal font-medium">{{member().lastActive | date:'medium'}}</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-text-muted">Member Since</span>
+        <span class="text-text-normal font-medium">{{member().createdOn | date:'longDate'}}</span>
+      </div>
+    </div>
+    
+    <div class="flex gap-2 mt-2">
+      <button class="flex-1 bg-primary hover:bg-primary-hover text-white py-2 rounded-lg font-medium transition-colors shadow-md shadow-primary/20">
+        Message
+      </button>
+      <button class="flex-1 bg-bg-input hover:bg-bg-hover text-text-normal py-2 rounded-lg font-medium transition-colors">
+        Like
+      </button>
+    </div>
+  </div>
+</div>
