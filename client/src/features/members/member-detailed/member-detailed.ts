@@ -14,19 +14,13 @@ import { MemberPhotos } from '../member-photos/member-photos';
 export class MemberDetailed implements OnInit {
   private memberService = inject(MemberService);
   private route = inject(ActivatedRoute);
-  
+
   member = signal<Member | null>(null);
 
   ngOnInit(): void {
-    this.loadMember();
-  }
-
-  loadMember() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (!id) return;
-
-    this.memberService.getMember(id).subscribe({
-      next: (member) => this.member.set(member)
+    this.route.data.subscribe({
+      next: (data) => this.member.set(data['member'])
     });
+
   }
 }
