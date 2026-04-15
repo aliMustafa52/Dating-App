@@ -12,6 +12,13 @@ export interface Member {
   photos: Photo[];
 }
 
+export interface UpdateMember {
+  displayName: string;
+  description?: string | null;
+  city: string;
+  country: string;
+}
+
 export interface Photo {
   id: number;
   url?: string | null;

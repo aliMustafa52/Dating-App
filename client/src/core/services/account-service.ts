@@ -36,6 +36,15 @@ export class AccountService {
     this.currentUser.set(null);
   }
 
+  updateCurrentUser(changes: Partial<User>) {
+    const user = this.currentUser();
+    if (!user) return;
+
+    const updatedUser = { ...user, ...changes };
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    this.currentUser.set(updatedUser);
+  }
+
   private setSession(user: User) {
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));

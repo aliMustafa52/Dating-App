@@ -43,11 +43,13 @@
 
     @if (accountService.currentUser(); as user) {
     <div class="hidden lg:flex items-center gap-4 bg-bg-input px-3 py-1.5 rounded-full border border-divider shadow-sm">
-      <div class="flex items-center gap-3 pr-2 border-r border-divider/50">
+      <div [routerLink]="['/members', user.id]" role="link" tabindex="0"
+        class="flex items-center gap-3 pr-2 border-r border-divider/50 cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
         <img [src]="user.imageUrl || 'user.png'" alt="User Profile"
-          class="w-8 h-8 rounded-full border border-divider/30 object-cover ring-1 ring-primary/20">
-        <span class="text-text-normal font-semibold text-sm">Welcome, {{ user.displayName
-          }}</span>
+          class="w-8 h-8 rounded-full border border-divider/30 object-cover ring-1 ring-primary/20 hover:ring-primary/40 transition-colors">
+        <span class="text-text-normal font-semibold text-sm hover:text-primary transition-colors">
+          Welcome, {{ user.displayName }}
+        </span>
       </div>
       <button (click)="logout()"
         class="group flex items-center justify-center p-1.5 rounded-full hover:bg-status-dnd/10 text-text-muted hover:text-status-dnd transition-all duration-300 active:scale-90"
@@ -96,15 +98,17 @@
 
     <div class="h-px bg-divider mx-4"></div>
 
-    @if (accountService.currentUser()) {
+    @if (accountService.currentUser(); as user) {
     <div class="flex flex-col gap-4 px-4">
       <div class="flex items-center justify-between bg-bg-input/50 p-4 rounded-xl border border-divider">
         <div class="flex items-center gap-3">
-          <img [src]="accountService.currentUser()?.imageUrl || 'user.png'" alt="User Profile"
+          <img [src]="user.imageUrl || 'user.png'" alt="User Profile"
             class="w-12 h-12 rounded-full border-2 border-primary/20 object-cover">
           <div class="flex flex-col">
-            <span class="text-text-header font-bold text-lg leading-tight">{{ accountService.currentUser()?.displayName
-              }}</span>
+            <a [routerLink]="['/members', user.id]" (click)="isMenuOpen.set(false)"
+              class="text-text-header font-bold text-lg leading-tight hover:text-primary transition-colors">
+              {{ user.displayName }}
+            </a>
             <span class="text-text-muted text-xs">Logged in</span>
           </div>
         </div>

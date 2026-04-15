@@ -8,15 +8,45 @@
 
     <!-- Main Content -->
     <div class="w-full md:w-2/3 lg:w-3/4 flex flex-col gap-6">
-      <!-- About -->
-      <div class="bg-bg-sidebar rounded-xl border border-divider p-6 shadow-sm">
-        <h3 class="text-xl font-bold text-text-header mb-4 flex items-center gap-2">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          About {{member()?.displayName}}
-        </h3>
-        <p class="text-text-normal leading-relaxed whitespace-pre-line">{{member()?.description || 'No description provided.'}}</p>
+      <!-- Profile Info -->
+      <div class="bg-bg-sidebar rounded-xl border border-divider overflow-hidden shadow-sm">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-input/20 border-b border-divider">
+          <div>
+            <p class="text-xs uppercase tracking-[0.16em] text-text-muted">Profile Info</p>
+            <h3 class="text-xl font-bold text-text-header mt-1">About {{member()?.displayName}}</h3>
+          </div>
+
+          @if (isCurrentUserProfile() && !isEditing()) {
+          <button type="button" (click)="startEditProfile()"
+            class="inline-flex items-center justify-center bg-bg-sidebar hover:bg-bg-hover text-text-normal px-4 py-2 rounded-lg text-sm font-semibold border border-divider transition-colors focus:ring-2 focus:ring-divider focus:outline-none">
+            Edit Profile
+          </button>
+          }
+        </div>
+
+        @if (isEditing()) {
+        <app-member-edit-form [member]="member()!" [isSaving]="isSaving()" (save)="saveProfile($event)"
+          (cancel)="cancelEditProfile()"></app-member-edit-form>
+        } @else {
+        <div class="p-6">
+          <p class="text-text-normal leading-relaxed whitespace-pre-line"
+            [class.text-text-muted]="!member()?.description" [class.italic]="!member()?.description">
+            {{member()?.description || 'No description provided.'}}
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+            <div class="bg-bg-input/40 rounded-lg p-3 border border-divider/70">
+              <p class="text-xs uppercase tracking-[0.12em] text-text-muted mb-1">City</p>
+              <p class="text-text-normal font-medium">{{member()?.city}}</p>
+            </div>
+            <div class="bg-bg-input/40 rounded-lg p-3 border border-divider/70">
+              <p class="text-xs uppercase tracking-[0.12em] text-text-muted mb-1">Country</p>
+              <p class="text-text-normal font-medium">{{member()?.country}}</p>
+            </div>
+          </div>
+        </div>
+        }
       </div>
 
       <!-- Photos -->
